@@ -1,0 +1,4 @@
+condition,exact_revenue,sim_revenue,exact_buyer,sim_buyer
+No AI,3.312,3.323,6.344,6.338
+Buyer-aligned AI,2.703,2.696,6.648,6.652
+Seller-aligned AI,4.578,4.584,5.711,5.708

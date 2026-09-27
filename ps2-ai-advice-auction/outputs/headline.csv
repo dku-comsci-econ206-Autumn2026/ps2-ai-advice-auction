@@ -1,0 +1,19 @@
+rule,condition,advice,trust,share_high,p_LL,p_HH,buyer_payoff,revenue,welfare
+first,No AI,none,0.0,0.25,0.562,0.062,6.344,3.312,16.0
+first,No AI,none,0.5,0.25,0.562,0.062,6.344,3.312,16.0
+first,No AI,none,1.0,0.25,0.562,0.062,6.344,3.312,16.0
+first,Buyer-aligned AI,Low,0.0,0.25,0.562,0.062,6.344,3.312,16.0
+first,Buyer-aligned AI,Low,0.5,0.125,0.766,0.016,6.648,2.703,16.0
+first,Buyer-aligned AI,Low,1.0,0.0,1.0,0.0,7.0,2.0,16.0
+first,Seller-aligned AI,High,0.0,0.25,0.562,0.062,6.344,3.312,16.0
+first,Seller-aligned AI,High,0.5,0.625,0.141,0.391,5.711,4.578,16.0
+first,Seller-aligned AI,High,1.0,1.0,0.0,1.0,5.5,5.0,16.0
+second,No AI,none,0.0,0.25,0.562,0.062,6.906,2.188,16.0
+second,No AI,none,0.5,0.25,0.562,0.062,6.906,2.188,16.0
+second,No AI,none,1.0,0.25,0.562,0.062,6.906,2.188,16.0
+second,Buyer-aligned AI,Low,0.0,0.25,0.562,0.062,6.906,2.188,16.0
+second,Buyer-aligned AI,Low,0.5,0.125,0.766,0.016,6.977,2.047,16.0
+second,Buyer-aligned AI,Low,1.0,0.0,1.0,0.0,7.0,2.0,16.0
+second,Seller-aligned AI,High,0.0,0.25,0.562,0.062,6.906,2.188,16.0
+second,Seller-aligned AI,High,0.5,0.625,0.141,0.391,6.414,3.172,16.0
+second,Seller-aligned AI,High,1.0,1.0,0.0,1.0,5.5,5.0,16.0
