@@ -1,6 +1,6 @@
 # AI Advice, Human Trust, and First-Price Bidding
 
-COMSCI/ECON 206 · PS2 · Team [TODO: FPXX] · Course instructor: Professor Luyao Zhang
+COMSCI/ECON 206 · PS2 · Team FP07 · Course instructor: Professor Luyao Zhang
 
 **Question.** When a bidding assistant serves either the buyer or the seller, does buyers'
 trust carry the assistant's objective into their bids, and whose payoff moves as a result?
@@ -81,7 +81,7 @@ Classroom peer play is exploratory, not population evidence.
 
 ## Links
 
-- Hugging Face Space: [TODO]
+- Hugging Face Space: https://huggingface.co/spaces/yt1080/ps2-ai-advice-auction
 - Paper and A0 poster: [TODO]
 
 License: MIT.
