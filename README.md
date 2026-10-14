@@ -1,6 +1,6 @@
 ![Current A0 poster](./poster.png)
 
-[View / download the poster PDF](./poster.pdf)
+[View / download the poster PDF](./PS2-FP2-TeamL-A0-Poster-Peer-Revised.pdf)
 
 [Hugging Face Demo](https://huggingface.co/spaces/dku-comsci-econ206-2026/ps2-ai-advice-auction)
 
