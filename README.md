@@ -4,7 +4,6 @@
 
 [Hugging Face Demo](https://huggingface.co/spaces/dku-comsci-econ206-2026/ps2-ai-advice-auction)
 
-<img width="606" height="429" alt="image" src="https://github.com/user-attachments/assets/7c8228d7-7403-4979-98c7-248444679f87" />
 
 
 
