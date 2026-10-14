@@ -1,3 +1,10 @@
+![Current A0 poster](./poster.png)
+
+[View / download the poster PDF](./poster.pdf)
+
+[Hugging Face Demo](https://huggingface.co/spaces/dku-comsci-econ206-2026/ps2-ai-advice-auction)
+
+
 # AI Advice, Human Trust, and First-Price Bidding
 
 COMSCI/ECON 206 · PS2 · Team FP07 · Course instructor: Professor Luyao Zhang
