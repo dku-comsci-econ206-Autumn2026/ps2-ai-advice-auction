@@ -1,96 +1,88 @@
-![Current A0 poster](./poster.png)
+![Final presentation poster](poster/final-poster.png)
 
-[View / download the poster PDF](./PS2-FP2-TeamL-A0-Poster-Peer-Revised.pdf)
+[Download the final A0 poster PDF](poster/final-poster.pdf)
 
-[Hugging Face Demo](https://huggingface.co/spaces/dku-comsci-econ206-2026/ps2-ai-advice-auction)
+# Whose Side Is the Bidding Assistant On?
 
+**AI Alignment, Human Trust, and Equilibrium Selection in a First-Price Auction**
 
+COMSCI/ECON 206 Computational Microeconomics · Final Project · Team FP2 / Team L ·
+Yitong Lin and Qingyue Liu · Course instructor: Professor Luyao Zhang ·
+Release: `v1.0-final` (October 21, 2026)
 
-
-# AI Advice, Human Trust, and First-Price Bidding
-
-COMSCI/ECON 206 · PS2 · Team FP07 · Course instructor: Professor Luyao Zhang
-
-**Question.** When a bidding assistant serves either the buyer or the seller, does buyers'
-trust carry the assistant's objective into their bids, and whose payoff moves as a result?
+**Research question.** How do disclosed sponsor objectives, advice following and beliefs
+interact with auction rules to redistribute surplus?
 
 ## The game
 
 Two buyers bid for one second-hand item worth 6 to each (units of 10 RMB). Each has a budget
-of 5 and bids Low 2 or High 5 at the same time. The higher bid wins and pays its own bid; ties
-are broken by a coin flip. Before bidding, buyers may see advice from an AI whose sponsor is
-disclosed: none, the buyer, or the seller.
+of 5 and simultaneously bids Low 2 or High 5. The higher bid wins and pays its own bid; ties
+split with probability 1/2; play stops after one allocation. Before bidding, buyers may see
+deterministic advice whose sponsor is disclosed: none, the buyer, or the seller.
 
 | Buyer 1 / Buyer 2 | Low 2 | High 5 |
 |---|---|---|
 | **Low 2** | (7, 7) | (5, 6) |
 | **High 5** | (6, 5) | (5.5, 5.5) |
 
-Payoff = money left + item value if won; ties give the average of winning and losing.
-
-## Main results (actual output of `python run_all.py`)
+## Main results (exact model calculations)
 
 | Fact | Value |
 |---|---|
-| Pure Nash equilibria (first price) | (Low, Low) and (High, High) |
-| Risk-dominant equilibrium | (Low, Low) |
+| Pure Nash equilibria (first price) | (Low, Low) and (High, High), plus a symmetric mixed equilibrium |
 | High is the better reply when P(other bids High) exceeds | p* = 2/3 |
-| Buyer-aligned AI advises / seller-aligned AI advises | Low / High |
-| Trust needed for following High advice to be rational, t* | 0.556 (with baseline High share 0.25, an assumption) |
-| Seller revenue at trust 1: buyer-aligned / seller-aligned AI | 2.0 / 5.0 |
-| Buyer payoff at trust 1: buyer-aligned / seller-aligned AI | 7.0 / 5.5 |
+| Buyer-objective / seller-objective advice | Low / High |
+| Advice-following threshold t\*(b) = (2/3 − b)/(1 − b) | 2/3, 5/9, 1/3 at assumed b = 0, 0.25, 0.5 |
+| Buyer payoff / seller revenue, no advice (b = 0.25) | 6.344 / 3.312 |
+| Buyer payoff / seller revenue at t = 1: buyer / seller advice | 7.0 / 2.0 and 5.5 / 5.0 |
 | Total welfare, every profile | 16 (advice only redistributes) |
 | Second-price comparison | High strictly dominant; unique equilibrium (High, High) |
 
-The baseline High share (0.25) is a placeholder until the No-AI peer-play data replace it.
-Full tables: `outputs/headline.csv`, `outputs/trust_sweep_first_price.csv`; figure:
-`figures/trust_sweep.png`.
+`t` is an exogenous advice-following probability and `b` an assumed baseline High share.
+Neither is a measured trust score or an empirical estimate. No participant data or
+live-LLM results are reported; classroom play is exploratory evidence only.
 
 ## Reproduce
 
 ```bash
-pip install -r requirements.txt
-pytest -q            # 8 checks: payoffs, equilibria, welfare, advice, threshold, second price
-python run_all.py    # writes outputs/ and figures/
+python -m pip install -r requirements.txt
+python -m pytest -q          # 12 tests: 8 baseline + 4 sensitivity checks
+python run_all.py            # writes outputs/ and figures/
+python final_sensitivity.py  # writes outputs/final_baseline_sensitivity.{csv,json,md}
 ```
 
-Colab: open `notebooks/ps2_analysis.ipynb`, set `REPO_URL` in the first code cell, Run all.
-Runtime is a few seconds; the Monte Carlo check uses seed 42 and 10,000 pairs.
+Colab: [notebooks/ps2_analysis.ipynb](https://colab.research.google.com/github/dku-comsci-econ206-Autumn2026/ps2-ai-advice-auction/blob/main/notebooks/ps2_analysis.ipynb), Run all.
+Exact package versions: `requirements-verified.txt`. The Monte Carlo check uses seed 42 and 10,000 pairs.
 
 ## Repository map
 
 | Path | Content |
 |---|---|
-| `src/auction.py` | Game primitives, payoffs, equilibria, advice rule, trust model |
-| `tests/test_auction.py` | Automated checks of every reported fact |
-| `run_all.py` | Regenerates all outputs and the figure |
+| `src/auction.py` | Game primitives, payoffs, equilibria, advice rule, following model |
+| `tests/` | Automated checks of every reported fact and threshold |
+| `run_all.py`, `final_sensitivity.py` | Regenerate all outputs and the figure |
 | `notebooks/ps2_analysis.ipynb` | Narrative walk-through with outputs |
-| `advice/prompts.md` | Planned protocol for checking a real language model's advice |
+| `advice/prompts.md` | Planned protocol for checking live-LLM advice |
 | `outputs/`, `figures/` | Generated results |
+| `poster/` | Final A0 poster (PNG preview and PDF) |
 
-## Pseudocode
+## Interactive demo
 
-```
-for rule in {first price, second price}:
-    build payoffs for all four bid profiles from value, budget, bids, rule
-    find pure Nash equilibria by checking every unilateral deviation
-    compute p*, risk dominance, and each sponsor's advice
-for condition in {No AI, buyer-aligned, seller-aligned}:
-    for trust t in 0, 0.05, ..., 1:
-        P(High) = t * [advice is High] + (1 - t) * baseline
-        expected payoffs = sum over profiles of P(profile) * payoff
-check expected values against a seeded Monte Carlo simulation
-```
+Hugging Face Space: https://huggingface.co/spaces/dku-comsci-econ206-2026/ps2-ai-advice-auction —
+three rounds (no advice / buyer objective / seller objective) with a pre-bid belief about the
+other buyer (0–100), a trust rating, a bid and a pre-outcome explanation; optional
+no-advice-first order; manual partner pairing; CSV export only on explicit request.
+Nothing is stored server-side.
 
 ## Limits
 
-Common, publicly known value rather than private values; two bid levels; one-shot play; trust
-modelled as one probability; baseline behavior assumed; LLM advice check not yet run.
-Classroom peer play is exploratory, not population evidence.
+Common known value, two bid levels, one-shot play, independent following, an assumed baseline
+and a deterministic adviser. Adding a feasible bid of 3 breaks the (Low, Low) equilibrium, so
+results are menu dependent. No AI-specific, trust-mediated or population effect is claimed.
 
 ## Links
 
-- Hugging Face Space: https://huggingface.co/spaces/yt1080/ps2-ai-advice-auction
-- Paper and A0 poster: [TODO]
+- Final paper and A0 poster: submitted on Canvas; poster in `poster/`
+- Final Ed record: https://edstem.org/us/courses/102917/discussion/8391519?comment=19481485
 
-License: MIT.
+License: MIT. AI assistance (Claude, OpenAI Codex) is disclosed in the paper's Appendix A.1.

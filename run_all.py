@@ -67,7 +67,7 @@ for metric, ax, title in [("share_high", axes[0], "Share of High bids"),
         ax.plot(d["trust"], d[metric], label=c, color=colors[c], lw=2)
     if t_star is not None:
         ax.axvline(t_star, color="#6B4FA8", ls="--", lw=1)
-    ax.set_title(title); ax.set_xlabel("Trust (probability of following advice)")
+    ax.set_title(title); ax.set_xlabel("Advice-following probability t")
     ax.grid(alpha=.3)
 axes[0].axhline(2/3, color="#6B4FA8", ls=":", lw=1)
 axes[0].legend(fontsize=8, loc="upper left")
@@ -77,7 +77,7 @@ fig.tight_layout()
 fig.savefig(FIG / "trust_sweep.png", dpi=200)
 
 print(open(OUT / "matrices.md").read())
-print(f"Trust threshold t* (first price, baseline {BASELINE_HIGH}): {t_star:.4f}\n")
+print(f"Advice-following threshold t* (first price, baseline {BASELINE_HIGH}): {t_star:.4f}\n")
 print(head.to_string(index=False))
 print("\nMonte Carlo check (trust 0.5, seed 42, 10,000 pairs):")
 print(pd.DataFrame(mc).to_string(index=False))
